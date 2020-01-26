@@ -32,6 +32,7 @@ def send_risk_data(lon, lat):
     """
     lon, lat = float(lon), float(lat)
     coords = [lon * (10.0 ** (-5)), lat * (10.0 ** (-5))]
+    print(coords);
     if location_check(coords[0], coords[1]) == False:
         output = ("Outside Australia", "No need to worry")
     else:

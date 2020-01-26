@@ -1,5 +1,7 @@
 package com.example.fireapp;
 
+import android.content.Context;
+import android.location.LocationManager;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -24,6 +26,7 @@ import java.util.Map;
 
 public class RequestManager
 {
+    private static final int SCALAR = 100000;
     public void get(String urlS, MainActivity a)
     {
         RequestQueue queue = Volley.newRequestQueue(a);
@@ -43,10 +46,9 @@ public class RequestManager
 
     public void get(String urlS, MainActivity a, double lon, double lat)
     {
-        String lons = ""+lon;
-        String lats = ""+lat;
-        lons = lons.replaceFirst("\\.", "-");
-        lats = lats.replaceFirst("\\.", "-");
+        String lons = "/"+(int)(lon * SCALAR);
+        String lats = "/"+(int)(lat * SCALAR);
+        urlS += lons + lats;
         RequestQueue queue = Volley.newRequestQueue(a);
         final StringBuilder sb;
         StringRequest sr = new StringRequest(Request.Method.GET, urlS, new Response.Listener<String>() {
